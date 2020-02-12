@@ -124,9 +124,21 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function show($id, Optimus $optimus)
+    protected $optimus;
+    
+    public function __construct(Optimus $optimus)
     {
-        $id = $optimus->decode($id);
+        $this->optimus = $optimus;
+    }
+    
+    public function hide($id)
+    {
+        return $this->optimus->encode($id);
+    }
+    
+    public function show($id)
+    {
+        return $this->optimus->decode($id);
     }
 }
 ```
